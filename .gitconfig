@@ -1,0 +1,38 @@
+[credential]
+  helper = osxkeychain
+
+[alias]
+	cf = config
+	cfg = config --global
+	cfgl = config --global --list
+	co = checkout
+	fch = fetch
+	sts = status
+	pl = pull
+	cl = clone
+	cp = cherry-pick
+	cob = checkout -b
+	br = branch
+	brd = branch -D
+	rem = remote
+	rb = rebase
+	rbi = rebase -i
+	rba = rebase --abort
+	rbc = rebase --continue
+	ps = push
+	cm = commit
+	cma = commit --amend
+	fix = commit --amend --no-edit
+	psu = push --set-upstream
+	stshp = stash pop
+	rbm = rebase master
+	pst = push --follow-tags
+	brm = branch -m
+	df = diff
+	psf = push -f
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	rs = reset
+
+[user]
+	name = {{COMMIT_NAME}}
+	email = {{COMMIT_EMAIL}}
