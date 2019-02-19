@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Theme-related plugins
 Plug 'fenetikm/falcon'
 Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
 
 " Linting
 Plug 'w0rp/ale'
@@ -29,6 +30,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 
+" TMUX integration
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 " Files and such
@@ -44,15 +48,19 @@ set encoding=utf8
 
 " Theme/Display Configuration
 syntax on
-colorscheme falcon
+colorscheme onedark
+set background=dark
 set termguicolors
 set noshowmode
 set noruler
 set noshowcmd
+set nowrap
 
-let g:falcon_lightline = 1
+set colorcolumn=80
+
+let g:onedark_lightline = 1
 let g:lightline = {
-  \ 'colorscheme': 'falcon',
+  \ 'colorscheme': 'onedark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
   \   'right': [ [ 'filetype' ] ]
@@ -73,9 +81,14 @@ set splitbelow
 " Use system clipboard
 set clipboard=unnamed
 
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/node_modules/*,*.class
+
 " NerdTree Configuration
 let NERDTreeShowHidden=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ctrl-p config
+let g:ctrlp_show_hidden = 1
 
 " Key Mapping things
 let mapleader = ","
@@ -101,8 +114,6 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:python3_host_skip_check = 1
 
 let g:deoplete#enable_at_startup = 1
-
-
 
 " Go settings
 let g:go_highlight_build_constraints = 1
