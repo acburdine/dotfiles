@@ -11,6 +11,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " File Explorer
 Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -74,9 +75,6 @@ set clipboard=unnamed
 
 " NerdTree Configuration
 let NERDTreeShowHidden=1
-autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd w
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Key Mapping things
