@@ -29,6 +29,7 @@ Plug 'pangloss/vim-javascript'
 " Autocomplete
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " TMUX integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -130,3 +131,6 @@ let g:go_highlight_variable_assignments = 1
 let g:go_fmt_command = "goimports"
 let g:go_gocode_autobuild = 0 "disable vim-go autocompletion
 let g:go_addtags_transform = "camelcase"
+
+" terraform fmt
+autocmd BufWritePost *.tf :TerraformFmt
