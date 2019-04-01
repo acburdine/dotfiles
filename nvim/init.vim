@@ -14,10 +14,14 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Comments
+Plug 'scrooloose/nerdcommenter'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -36,11 +40,12 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
+set autoread
+
 " Files and such
 filetype plugin on
 filetype indent on
 
-set autoread
 set nobackup
 set nowb
 set noswapfile
@@ -55,7 +60,6 @@ set termguicolors
 set noshowmode
 set noruler
 set noshowcmd
-set nowrap
 
 set colorcolumn=80
 
@@ -131,6 +135,7 @@ let g:go_highlight_variable_assignments = 1
 let g:go_fmt_command = "goimports"
 let g:go_gocode_autobuild = 0 "disable vim-go autocompletion
 let g:go_addtags_transform = "camelcase"
+nmap <leader>gt :GoTest<cr>
 
 " terraform fmt
 autocmd BufWritePost *.tf :TerraformFmt
