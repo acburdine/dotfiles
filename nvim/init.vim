@@ -137,5 +137,8 @@ let g:go_gocode_autobuild = 0 "disable vim-go autocompletion
 let g:go_addtags_transform = "camelcase"
 nmap <leader>gt :GoTest<cr>
 
-" terraform fmt
+" Terraform Settings
 autocmd BufWritePost *.tf :TerraformFmt
+
+let g:terraform_fold_sections=1
+let g:terraform_remap_spacebar=1
