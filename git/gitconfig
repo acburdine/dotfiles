@@ -1,0 +1,56 @@
+[credential]
+  helper = osxkeychain
+
+[alias]
+	cf = config
+	cfg = config --global
+	cfgl = config --global --list
+	cl = clone
+	cm = commit
+	cp = cherry-pick
+	cob = checkout -b
+	ps = push
+	pl = pull
+	rb = rebase
+	rbi = rebase -i
+	rbc = rebase --continue
+	rba = rebase --abort
+	sts = status
+	co = checkout
+	psu = push --set-upstream
+	brd = branch -D
+	fch = fetch -p
+	fix = commit --amend --no-edit
+	cma = commit --amend
+	br = branch
+	rem = remote
+	cfl = config --list
+	rbm = rebase master
+	coo = checkout --orphan
+	plr = pull -r
+	l = log
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	d = diff
+	pst = push --follow-tags
+	stshp = stash pop
+	df = diff
+	brm = branch -m
+	p = "!git pull --ff-only"
+	fixup = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
+	cleanup = "!git branch --merged | grep -v -P '^\\*|master|develop' | xargs -n1 -r git branch -d"
+	children = "!bash -c 'c=${1:-HEAD}; set -- $(git rev-list --all --not \"$c\"^@ --children | grep $(git rev-parse \"$c\") ); shift; echo $1' -"
+	mrg = merge
+	rs = reset
+
+[user]
+	name = Austin Burdine
+	email = {{COMMIT_EMAIL}}
+
+[credential "https://github.com"]
+	username = acburdine
+
+[core]
+	excludesfile = {{DOTFILES_DIR}}/git/gitignore_global
+
+[hub]
+	protocol = https
