@@ -112,9 +112,13 @@ if ! hash tmux 2>/dev/null; then
   brew install tmux
 fi
 
-if [ ! -f "${HOME}/.tmux.conf" ]; then
+if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+  echo "tpm not found, installing it"
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  ~/.tmux/plugins/tmp/bin/install_plugins
+fi
+
+if [ ! -f "${HOME}/.tmux.conf" ]; then
+  ~/.tmux/plugins/tpm/bin/install_plugins
   ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.tmux.conf
 else
   echo "tmux config already exists, skipping"
