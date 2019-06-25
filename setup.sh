@@ -120,7 +120,7 @@ fi
 if [ ! -f "${HOME}/.tmux.conf" ]; then
   ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.tmux.conf
   tmux new -d -s tmp
-  ~/.tmux/plugins/tpm/bin/install_plugins
+  tmux send -t tmp.0 ~/.tmux/plugins/tpm/bin/install_plugins ENTER
   tmux kill-session -t tmp
 else
   echo "tmux config already exists, skipping"
