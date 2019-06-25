@@ -54,7 +54,7 @@ set encoding=utf8
 
 " Theme/Display Configuration
 syntax on
-colorscheme onedark
+silent! colorscheme onedark
 set background=dark
 set termguicolors
 set noshowmode
