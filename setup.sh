@@ -41,23 +41,23 @@ fi
 cd ~ # ensure we're in home folder
 
 ## Git Config
-if [ ! -f "~/.gitconfig" ]; then
+if [ ! -f "${HOME}/.gitconfig" ]; then
   GIT_COMMIT_EMAIL=$(dotfiles_setup_prompt "Git Commit Email")
   GIT_CONFIG_FILE=$(cat $DOTFILES_DIR/git/gitconfig | sed "s/{{COMMIT_EMAIL}}/${GIT_COMMIT_EMAIL}/;s/{{DOTFILES_DIR}}/${DOTFILES_DIR//\//\\/}/")
-  echo $GIT_CONFIG_FILE > ~/.gitconfig
+  echo "$GIT_CONFIG_FILE" > ~/.gitconfig
 else
   echo "~/.gitconfig already exists, skipping"
 fi
 
 ## Add tokens file
-if [ ! -f "~/.dem-tokens" ]; then
+if [ ! -f "${HOME}/.dem-tokens" ]; then
   touch ~/.dem-tokens && chmod 600 ~/.dem-tokens
 else
   echo ".dem-tokens file already exists, skipping"
 fi
 
 ## Setup z.sh
-if [ ! -d "~/bin/z" ]; then
+if [ ! -d "${HOME}/bin/z" ]; then
   mkdir -p ~/bin/z/
   git clone https://github.com/rupa/z ~/bin/z/
 else
@@ -76,7 +76,7 @@ if [ ! -f "/usr/local/etc/bash_completion" ]; then
 fi
 
 ## Bash Profile Setup
-if [ ! -f "~/.bash_profile" ]; then
+if [ ! -f "${HOME}/.bash_profile" ]; then
   ln -s $DOTFILES_DIR/.bash_profile ~/.bash_profile
   source ~/.bash_profile
 else
@@ -98,7 +98,7 @@ if ! hash nvim 2>/dev/null; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if [ ! -f "~/.config/nvim/init.vim" ]; then
+if [ ! -f "${HOME}/.config/nvim/init.vim" ]; then
   mkdir -p ~/.config/nvim/
   ln -s $DOTFILES_DIR/nvim/init.vim ~/.config/nvim/init.vim
 	nvim /tmp/vimfile.txt +PlugInstall +UpdateRemotePlugins +qall
@@ -112,8 +112,9 @@ if ! hash tmux 2>/dev/null; then
   brew install tmux
 fi
 
-if [ ! -f "~/.tmux.conf" ]; then
+if [ ! -f "${HOME}/.tmux.conf" ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tmp/bin/install_plugins
   ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.tmux.conf
 else
   echo "tmux config already exists, skipping"
