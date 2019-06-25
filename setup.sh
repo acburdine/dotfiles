@@ -118,8 +118,8 @@ if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
 fi
 
 if [ ! -f "${HOME}/.tmux.conf" ]; then
-  ~/.tmux/plugins/tpm/bin/install_plugins
   ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.tmux.conf
+  ~/.tmux/plugins/tpm/bin/install_plugins
 else
   echo "tmux config already exists, skipping"
 fi
