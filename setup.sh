@@ -94,14 +94,14 @@ if ! hash nvim 2>/dev/null; then
   echo "nvim not found, installing it"
   brew install nvim
   pip3 install neovim
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 if [ ! -f "${HOME}/.config/nvim/init.vim" ]; then
   mkdir -p ~/.config/nvim/
   ln -s $DOTFILES_DIR/nvim/init.vim ~/.config/nvim/init.vim
-	nvim /tmp/vimfile.txt +PlugInstall +UpdateRemotePlugins +qall
+  nvim /tmp/vimfile.txt +PlugInstall +UpdateRemotePlugins +qall
 else
   echo "nvim config already exists, skipping"
 fi
