@@ -12,6 +12,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " File Explorer
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Comments
@@ -29,11 +30,15 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'hashivim/vim-terraform'
 Plug 'pangloss/vim-javascript'
+Plug 'amadeus/vim-jsx'
+Plug 'amadeus/vim-xml'
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'OmniSharp/omnisharp-vim'
+
+" Docs
+Plug 'rizzatti/dash.vim'
 
 " TMUX integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -51,6 +56,9 @@ set nowb
 set noswapfile
 
 set encoding=utf8
+
+set nowrap
+set formatoptions-=tc
 
 " Theme/Display Configuration
 syntax on
@@ -106,6 +114,9 @@ map <C-l> <C-W>l
 
 nmap <leader>so :source ~/.config/nvim/init.vim<cr>
 nmap <leader>w :w<cr>
+nmap <leader>nt :NERDTree<cr>
+nmap <leader>ntf :NERDTreeFocus<cr>
+nmap <leader>md :LivedownPreview<cr>
 
 " Autocomplete Settings
 set updatetime=250
@@ -142,3 +153,18 @@ autocmd BufWritePost *.tf :TerraformFmt
 
 let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
+
+" Omnisharp
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_server_use_mono = 1
+
+" ALE
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+
+" EJS Syntax View
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+
+" SQL
+let g:omni_sql_no_default_maps = 1

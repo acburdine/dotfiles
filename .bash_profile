@@ -29,10 +29,10 @@ complete -o default -o nospace -F _git g
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-alias ax='aws-okta exec'
+alias ax='aws-okta exec --mfa-factor-type push'
 alias tf='f() { if [ $# -lt 2 ]; then echo "please run \"tf <profile> <cmd>\""; else ax "$1" -- terraform "${@:2}"; fi }; f'
 alias tfinit='terraform init'
-alias gentfdocs='terraform-docs md . > README.md'
+alias gentfdocs='~/go/bin/terraform-docs md . > README.md'
 alias ch='f() { if [ $# -lt 2 ]; then echo "please run \"ch <profile> <cmd>\""; else ax "$1" -- chamber "${@:2}"; fi }; f'
 
 # editor alias
@@ -49,4 +49,5 @@ function prompt {
 }
 
 [ -f ~/.dem-tokens ] && source ~/.dem-tokens
+[ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/bin/z/z.sh ] && source ~/bin/z/z.sh
