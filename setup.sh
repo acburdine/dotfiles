@@ -75,12 +75,26 @@ if [ ! -f "/usr/local/etc/bash_completion" ]; then
   brew install bash-completion
 fi
 
-## Bash Profile Setup
+## Bash Profile Setup (deprecated)
 if [ ! -f "${HOME}/.bash_profile" ]; then
   ln -s $DOTFILES_DIR/.bash_profile ~/.bash_profile
   source ~/.bash_profile
 else
   echo "~/.bash_profile already exists, skipping"
+fi
+
+## install fish
+if ! hash fish 2>/dev/null; then
+  echo "fish not found, installing it"
+  brew install fish
+fi
+
+## Fish config
+if [ ! -f "$HOME/.config/fish/config.fish" ]; then
+  mkdir -p ~/.config/fish/
+  ln -s $DOTFILES_DIR/fish/config.fish ~/.config/fish/config.fish
+else
+  echo "fish config already installed"
 fi
 
 ## Python Setup (Needed for NeoVim)
