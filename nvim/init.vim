@@ -1,3 +1,8 @@
+" if we're using fish, switch the shell to bash for posix compat
+if &shell =~# 'fish$'
+  set shell=bash
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 " Theme-related plugins
 Plug 'fenetikm/falcon'
@@ -33,6 +38,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'amadeus/vim-jsx'
 Plug 'amadeus/vim-xml'
 Plug 'jparise/vim-graphql'
+Plug 'dag/vim-fish'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
