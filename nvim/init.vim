@@ -32,6 +32,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'pangloss/vim-javascript'
 Plug 'amadeus/vim-jsx'
 Plug 'amadeus/vim-xml'
+Plug 'jparise/vim-graphql'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -117,6 +118,9 @@ nmap <leader>w :w<cr>
 nmap <leader>nt :NERDTree<cr>
 nmap <leader>ntf :NERDTreeFocus<cr>
 nmap <leader>md :LivedownPreview<cr>
+
+" Because I fat-finger :W instead of :w all the time
+command W w
 
 " Autocomplete Settings
 set updatetime=250

@@ -2,7 +2,7 @@
 
 # Custom path exports
 export GOPATH=$(go env GOPATH)
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/Users/aburdine/bin:$GOPATH/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/Users/aburdine/bin:$GOPATH/bin:/opt/cisco/anyconnect/bin
 
 export EDITOR="nvim"
 
