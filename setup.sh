@@ -88,7 +88,7 @@ if ! hash fish 2>/dev/null; then
   echo "fish not found, installing it"
   brew install fish
   fishpath=$(which fish)
-  sudo echo $fishpath >> /etc/shells
+  echo $fishpath | sudo tee -a /etc/shells
   chsh -s $fishpath
 fi
 
@@ -102,10 +102,11 @@ else
 fi
 
 ## install oh-my-fish
-if ! hash omf 2> /dev/null; then
-  curl -L https://get.oh-my.fish | fish
-  omf install aws bass bobthefish
-  omf theme bobthefish
+if [ ! -d "${HOME}/.local/share/omf" ]; then
+  echo "omf not installed, installing it"
+  curl -L https://get.oh-my.fish > /tmp/omf-install
+  fish /tmp/omf-install --noninteractive -y
+  fish ./fish/omf-setup.fish
 fi
 
 ## setup z.fish
