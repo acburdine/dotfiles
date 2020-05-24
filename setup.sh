@@ -93,6 +93,7 @@ fi
 if [ ! -f "$HOME/.config/fish/config.fish" ]; then
   mkdir -p ~/.config/fish/
   ln -s $DOTFILES_DIR/fish/config.fish ~/.config/fish/config.fish
+  ln -s $DOTFILES_DIR/fish/functions/*.fish ~/.config/fish/functions/
 else
   echo "fish config already installed"
 fi
