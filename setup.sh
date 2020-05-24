@@ -87,6 +87,9 @@ fi
 if ! hash fish 2>/dev/null; then
   echo "fish not found, installing it"
   brew install fish
+  fishpath=$(which fish)
+  sudo echo $fishpath >> /etc/shells
+  chsh -s $fishpath
 fi
 
 ## Fish config
@@ -96,6 +99,20 @@ if [ ! -f "$HOME/.config/fish/config.fish" ]; then
   ln -s $DOTFILES_DIR/fish/functions/*.fish ~/.config/fish/functions/
 else
   echo "fish config already installed"
+fi
+
+## install oh-my-fish
+if ! hash omf 2> /dev/null; then
+  curl -L https://get.oh-my.fish | fish
+  omf install aws bass bobthefish
+  omf theme bobthefish
+fi
+
+## setup z.fish
+if [ ! -d "${HOME}/bin/z-fish" ]; then
+  git clone https://github.com/sjl/z-fish ~/bin/z-fish
+else
+  echo "z-fish already installed"
 fi
 
 ## Python Setup (Needed for NeoVim)
