@@ -35,8 +35,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'hashivim/vim-terraform'
 Plug 'pangloss/vim-javascript'
-Plug 'amadeus/vim-jsx'
-Plug 'amadeus/vim-xml'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'dag/vim-fish'
 
@@ -156,7 +155,10 @@ let g:go_highlight_variable_assignments = 1
 let g:go_fmt_command = "goimports"
 let g:go_gocode_autobuild = 0 "disable vim-go autocompletion
 let g:go_addtags_transform = "camelcase"
+let g:go_list_type = 'locationlist'
 nmap <leader>gt :GoTest<cr>
+nmap <leader>j :lnext<cr>
+nmap <leader>k :lprevious<cr>
 
 " Terraform Settings
 autocmd BufWritePost *.tf :TerraformFmt
