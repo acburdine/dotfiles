@@ -19,6 +19,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-eunuch'
 
 " Comments
 Plug 'scrooloose/nerdcommenter'
@@ -123,6 +124,7 @@ nmap <leader>w :w<cr>
 nmap <leader>nt :NERDTree<cr>
 nmap <leader>ntf :NERDTreeFocus<cr>
 nmap <leader>md :LivedownPreview<cr>
+nmap <leader>cr :CocRestart<cr>
 
 " Because I fat-finger :W instead of :w all the time
 command W w
