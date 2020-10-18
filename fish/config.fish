@@ -1,6 +1,6 @@
 # custom path exports
 set -x GOPATH (go env GOPATH)
-set -x PATH /usr/local/bin /usr/local/sbin $PATH /Users/aburdine/bin $GOPATH/bin /opt/cisco/anyconnect/bin
+set -x PATH /usr/local/bin /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin /opt/cisco/anyconnect/bin
 
 set -x EDITOR nvim
 

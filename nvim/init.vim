@@ -39,6 +39,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'dag/vim-fish'
+Plug 'rust-lang/rust.vim'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -176,6 +177,9 @@ let g:OmniSharp_server_use_mono = 1
 let g:ale_linters = {
 \ 'cs': ['OmniSharp']
 \}
+
+" Rust
+let g:rustfmt_autosave = 1
 
 " EJS Syntax View
 autocmd BufNewFile,BufRead *.ejs set filetype=html
