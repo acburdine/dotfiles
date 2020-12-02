@@ -4,6 +4,8 @@ set -x PATH /usr/local/bin /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.ca
 
 set -x EDITOR nvim
 
+set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/library
+
 alias ls="ls -GFh"
 alias fp="nvim ~/.config/fish/config.fish"
 alias fpr="source ~/.config/fish/config.fish"
