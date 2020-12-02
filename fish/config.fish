@@ -38,3 +38,6 @@ end
 function ch
   aws-okta exec $argv[1] -- chamber $argv[2..-1]
 end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/bin/gcloud/path.fish.inc" ]; source "$HOME/bin/gcloud/path.fish.inc"; end
