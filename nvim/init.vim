@@ -22,7 +22,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-eunuch'
 
 " Comments
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -49,6 +49,9 @@ Plug 'OmniSharp/omnisharp-vim'
 
 " Docs
 Plug 'rizzatti/dash.vim'
+
+" REST Client
+Plug 'diepm/vim-rest-console'
 
 " TMUX integration
 Plug 'christoomey/vim-tmux-navigator'
