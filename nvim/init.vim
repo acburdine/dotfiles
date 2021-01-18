@@ -42,9 +42,13 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
+Plug 'ron-rs/ron.vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
 Plug 'OmniSharp/omnisharp-vim'
 
 " Docs
@@ -135,6 +139,13 @@ nmap <leader>cr :CocRestart<cr>
 " Because I fat-finger :W instead of :w all the time
 command W w
 
+" Fix coc-nvim scrolling
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Right>"
+inoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Left>"
+
 " Autocomplete Settings
 set updatetime=250
 set completeopt+=noinsert
@@ -191,3 +202,14 @@ autocmd BufNewFile,BufRead *.ejs set filetype=html
 
 " SQL
 let g:omni_sql_no_default_maps = 1
+
+" CoC Extensions
+let g:coc_global_extensions = [
+  \ 'coc-marketplace',
+  \ 'coc-tsserver',
+  \ 'coc-rls',
+  \ 'coc-json',
+  \ 'coc-go',
+  \ 'coc-elixir',
+  \ 'coc-ember'
+\ ]
