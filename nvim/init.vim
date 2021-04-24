@@ -46,6 +46,7 @@ Plug 'ron-rs/ron.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'cespare/vim-toml'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
@@ -136,8 +137,13 @@ nmap <leader>ntf :NERDTreeFocus<cr>
 nmap <leader>md :LivedownPreview<cr>
 nmap <leader>cr :CocRestart<cr>
 
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 " Because I fat-finger :W instead of :w all the time
-command W w
+command! W w
 
 " Fix coc-nvim scrolling
 " Remap <C-f> and <C-b> for scroll float windows/popups.
@@ -180,14 +186,17 @@ nmap <leader>j :lnext<cr>
 nmap <leader>k :lprevious<cr>
 
 " Terraform Settings
-autocmd BufWritePost *.tf :TerraformFmt
+autocmd BufWritePost *.tf if &filetype == "terraform" | exec 'TerraformFmt' | endif
 
 let g:terraform_fold_sections=1
-let g:terraform_remap_spacebar=1
 
 " Omnisharp
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_server_use_mono = 1
+
+" Elixir
+let g:mix_format_on_save = 1
+let g:mix_format_silent_errors = 1
 
 " ALE
 let g:ale_linters = {
