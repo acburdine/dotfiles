@@ -13,7 +13,9 @@ alias g="git"
 alias gs="git status"
 alias gd="git diff"
 alias gl="git log --oneline"
+alias gln="git log --oneline -n"
 alias hs="hub sync"
+alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
 
 alias ax="aws-okta exec --mfa-factor-type push --mfa-provider OKTA"
 alias tfinit="terraform init"
@@ -35,6 +37,10 @@ end
 
 if test -e ~/bin/z-fish/z.fish
   source ~/bin/z-fish/z.fish
+end
+
+if test -e ~/.asdf/asdf.fish
+  source ~/.asdf/asdf.fish
 end
 
 function ch
