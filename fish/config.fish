@@ -6,6 +6,8 @@ set -x EDITOR nvim
 
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/library
 
+set -x GPG_TTY (tty)
+
 alias ls="ls -GFh"
 alias fp="nvim ~/.config/fish/config.fish"
 alias fpr="source ~/.config/fish/config.fish"
@@ -18,6 +20,7 @@ alias hs="hub sync"
 alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
 
 alias ax="aws-okta exec --mfa-factor-type push --mfa-provider OKTA"
+alias avx="aws-vault exec"
 alias tfinit="terraform init"
 alias tfv="terraform validate"
 
