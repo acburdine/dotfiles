@@ -134,6 +134,7 @@ fi
 if [ ! -f "${HOME}/.config/nvim/init.vim" ]; then
   mkdir -p ~/.config/nvim/
   ln -s $DOTFILES_DIR/nvim/init.vim ~/.config/nvim/init.vim
+  ln -s $DOTFILES_DIR/nvim/ftplugin ~/.config/nvim/ftplugin
   nvim /tmp/vimfile.txt +PlugInstall +UpdateRemotePlugins +qall
 else
   echo "nvim config already exists, skipping"
