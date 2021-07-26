@@ -52,6 +52,10 @@ Plug 'cespare/vim-toml'
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
 Plug 'OmniSharp/omnisharp-vim'
 
+" Various code plugins
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
 " Docs
 Plug 'rizzatti/dash.vim'
 
