@@ -2,11 +2,6 @@
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-function dotfiles_setup_prompt {
-  read -rp "${1}: " val
-  printf '%s' "$val"
-}
-
 ## MACOS Defaults
 
 if [ "$(uname)" == "Darwin" ]; then
@@ -21,8 +16,7 @@ cd ~ || exit # ensure we're in home folder
 
 ## Git Config
 if [ ! -f "${HOME}/.gitconfig" ]; then
-  GIT_COMMIT_EMAIL=$(dotfiles_setup_prompt "Git Commit Email")
-  GIT_CONFIG_FILE=$(sed "s/{{COMMIT_EMAIL}}/${GIT_COMMIT_EMAIL}/;s/{{DOTFILES_DIR}}/${DOTFILES_DIR//\//\\/}/" <"$DOTFILES_DIR/git/gitconfig")
+  GIT_CONFIG_FILE=$(sed "s/{{DOTFILES_DIR}}/${DOTFILES_DIR//\//\\/}/" <"$DOTFILES_DIR/git/gitconfig")
   echo "$GIT_CONFIG_FILE" >~/.gitconfig
 else
   echo "$HOME/.gitconfig already exists, skipping"
