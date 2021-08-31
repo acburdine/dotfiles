@@ -15,6 +15,9 @@ Plug 'w0rp/ale'
 " EditorConfig
 Plug 'editorconfig/editorconfig-vim'
 
+" Shell Editing
+Plug 'z0mbix/vim-shfmt'
+
 " File Explorer
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -216,6 +219,9 @@ autocmd BufNewFile,BufRead *.ejs set filetype=html
 
 " SQL
 let g:omni_sql_no_default_maps = 1
+
+" Shell
+let g:shfmt_fmt_on_save = 1
 
 " CoC Extensions
 let g:coc_global_extensions = [
