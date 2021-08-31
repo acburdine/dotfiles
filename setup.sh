@@ -3,8 +3,8 @@
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 function dotfiles_setup_prompt {
-  read -p "${1}: " val
-  printf $val
+  read -rp "${1}: " val
+  printf '%s' "$val"
 }
 
 ## MACOS Defaults
@@ -12,7 +12,7 @@ function dotfiles_setup_prompt {
 if [ "$(uname)" == "Darwin" ]; then
   # Key Repeat
   defaults write -g InitialKeyRepeat -int 10 # 150 ms
-  defaults write -g KeyRepeat -int 2 # 15 ms
+  defaults write -g KeyRepeat -int 2         # 15 ms
 
   # Tap to Click
   defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
@@ -26,7 +26,7 @@ if [ "$(uname)" == "Darwin" ]; then
   defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
   # Disable Notification Center and remove the menu bar icon
-  launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+  launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2>/dev/null
 
   # Increase sound quality for Bluetooth headphones/headsets
   defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -38,22 +38,22 @@ if [ "$(uname)" == "Darwin" ]; then
   open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
 fi
 
-cd ~ # ensure we're in home folder
+cd ~ || exit # ensure we're in home folder
 
 ## Git Config
 if [ ! -f "${HOME}/.gitconfig" ]; then
   GIT_COMMIT_EMAIL=$(dotfiles_setup_prompt "Git Commit Email")
-  GIT_CONFIG_FILE=$(cat $DOTFILES_DIR/git/gitconfig | sed "s/{{COMMIT_EMAIL}}/${GIT_COMMIT_EMAIL}/;s/{{DOTFILES_DIR}}/${DOTFILES_DIR//\//\\/}/")
-  echo "$GIT_CONFIG_FILE" > ~/.gitconfig
+  GIT_CONFIG_FILE=$(sed "s/{{COMMIT_EMAIL}}/${GIT_COMMIT_EMAIL}/;s/{{DOTFILES_DIR}}/${DOTFILES_DIR//\//\\/}/" <"$DOTFILES_DIR/git/gitconfig")
+  echo "$GIT_CONFIG_FILE" >~/.gitconfig
 else
-  echo "~/.gitconfig already exists, skipping"
+  echo "$HOME/.gitconfig already exists, skipping"
 fi
 
 ## Add tokens file
 if [ ! -f "${HOME}/.dem-tokens" ]; then
   touch ~/.dem-tokens && chmod 600 ~/.dem-tokens
 else
-  echo ".dem-tokens file already exists, skipping"
+  echo "$HOME/.dem-tokens file already exists, skipping"
 fi
 
 ## Setup z.sh
@@ -77,10 +77,12 @@ fi
 
 ## Bash Profile Setup (deprecated)
 if [ ! -f "${HOME}/.bash_profile" ]; then
-  ln -s $DOTFILES_DIR/.bash_profile ~/.bash_profile
+  ln -s "$DOTFILES_DIR/.bash_profile" ~/.bash_profile
+
+  # shellcheck source=./.bash_profile
   source ~/.bash_profile
 else
-  echo "~/.bash_profile already exists, skipping"
+  echo "$HOME/.bash_profile already exists, skipping"
 fi
 
 ## install fish
@@ -88,15 +90,15 @@ if ! hash fish 2>/dev/null; then
   echo "fish not found, installing it"
   brew install fish
   fishpath=$(which fish)
-  echo $fishpath | sudo tee -a /etc/shells
-  chsh -s $fishpath
+  echo "$fishpath" | sudo tee -a /etc/shells
+  chsh -s "$fishpath"
 fi
 
 ## Fish config
 if [ ! -f "$HOME/.config/fish/config.fish" ]; then
   mkdir -p ~/.config/fish/
-  ln -s $DOTFILES_DIR/fish/config.fish ~/.config/fish/config.fish
-  ln -s $DOTFILES_DIR/fish/functions/*.fish ~/.config/fish/functions/
+  ln -s "$DOTFILES_DIR/fish/config.fish" ~/.config/fish/config.fish
+  ln -s "$DOTFILES_DIR/fish/functions/*.fish" ~/.config/fish/functions/
 else
   echo "fish config already installed"
 fi
@@ -104,7 +106,7 @@ fi
 ## install oh-my-fish
 if [ ! -d "${HOME}/.local/share/omf" ]; then
   echo "omf not installed, installing it"
-  curl -L https://get.oh-my.fish > /tmp/omf-install
+  curl -L https://get.oh-my.fish >/tmp/omf-install
   fish /tmp/omf-install --noninteractive -y
   fish ./fish/omf-setup.fish
 fi
@@ -133,8 +135,8 @@ fi
 
 if [ ! -f "${HOME}/.config/nvim/init.vim" ]; then
   mkdir -p ~/.config/nvim/
-  ln -s $DOTFILES_DIR/nvim/init.vim ~/.config/nvim/init.vim
-  ln -s $DOTFILES_DIR/nvim/ftplugin ~/.config/nvim/ftplugin
+  ln -s "$DOTFILES_DIR/nvim/init.vim" ~/.config/nvim/init.vim
+  ln -s "$DOTFILES_DIR/nvim/ftplugin" ~/.config/nvim/ftplugin
   nvim /tmp/vimfile.txt +PlugInstall +UpdateRemotePlugins +qall
 else
   echo "nvim config already exists, skipping"
@@ -152,7 +154,7 @@ if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
 fi
 
 if [ ! -f "${HOME}/.tmux.conf" ]; then
-  ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.tmux.conf
+  ln -s "$DOTFILES_DIR/tmux/tmux.conf" ~/.tmux.conf
   tmux new -d -s tmp
   tmux send -t tmp.0 ~/.tmux/plugins/tpm/bin/install_plugins ENTER
   tmux kill-session -t tmp
