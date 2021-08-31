@@ -11,8 +11,10 @@ function dotfiles_setup_prompt {
 
 if [ "$(uname)" == "Darwin" ]; then
   source "$DOTFILES_DIR/setup-mac.sh"
+elif [ "$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d \")" == "Ubuntu" ]; then
+  source "$DOTFILES_DIR/setup-ubuntu.sh"
 else
-  echo "non-macos OS's aren't supported yet" && exit 1
+  echo "only macos and ubuntu distros are currently supported" && exit 1
 fi
 
 cd ~ || exit # ensure we're in home folder
@@ -41,7 +43,7 @@ else
   echo "z is already installed, skipping"
 fi
 
-if [ ! -f "/usr/local/etc/bash_completion" ]; then
+if [ ! -f "/usr/local/etc/bash_completion" ] && [ ! -f "/etc/bash_completion" ]; then
   echo "bash_completion not installed, installing it"
   install_thing bash-completion
 fi
@@ -98,7 +100,7 @@ fi
 ## NVIM SETUP
 if ! hash nvim 2>/dev/null; then
   echo "nvim not found, installing it"
-  install_thing nvim
+  install_thing neovim
   pip3 install neovim
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
