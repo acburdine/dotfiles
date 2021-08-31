@@ -44,7 +44,7 @@
 
 [user]
 	name = Austin Burdine
-	email = {{COMMIT_EMAIL}}
+	email = acburdine@gmail.com
 
 [credential "https://github.com"]
 	username = acburdine
