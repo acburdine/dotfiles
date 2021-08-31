@@ -10,32 +10,9 @@ function dotfiles_setup_prompt {
 ## MACOS Defaults
 
 if [ "$(uname)" == "Darwin" ]; then
-  # Key Repeat
-  defaults write -g InitialKeyRepeat -int 10 # 150 ms
-  defaults write -g KeyRepeat -int 2         # 15 ms
-
-  # Tap to Click
-  defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-  defaults -currentHost write 'Apple Global Domain' com.apple.mouse.tapBehavior 1
-
-  # Disable "Are you sure you want to open this application" dialog
-  defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-  # Disable Resume system-wide
-  defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
-
-  # Disable Notification Center and remove the menu bar icon
-  launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2>/dev/null
-
-  # Increase sound quality for Bluetooth headphones/headsets
-  defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
-
-  # Disable the warning before emptying the Trash
-  defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-  # Install One Dark itermcolors theme
-  open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
+  source "$DOTFILES_DIR/setup-mac.sh"
+else
+  echo "non-macos OS's aren't supported yet" && exit 1
 fi
 
 cd ~ || exit # ensure we're in home folder
@@ -64,15 +41,9 @@ else
   echo "z is already installed, skipping"
 fi
 
-## Brew Setup
-if ! hash brew 2>/dev/null; then
-  echo "Homebrew not found, installing it"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
 if [ ! -f "/usr/local/etc/bash_completion" ]; then
   echo "bash_completion not installed, installing it"
-  brew install bash-completion
+  install_thing bash-completion
 fi
 
 ## Bash Profile Setup (deprecated)
@@ -88,7 +59,7 @@ fi
 ## install fish
 if ! hash fish 2>/dev/null; then
   echo "fish not found, installing it"
-  brew install fish
+  install_thing fish
   fishpath=$(which fish)
   echo "$fishpath" | sudo tee -a /etc/shells
   chsh -s "$fishpath"
@@ -121,13 +92,13 @@ fi
 ## Python Setup (Needed for NeoVim)
 if ! hash python3 2>/dev/null; then
   echo "python3 not found, installing it"
-  brew install python3
+  install_thing python3
 fi
 
 ## NVIM SETUP
 if ! hash nvim 2>/dev/null; then
   echo "nvim not found, installing it"
-  brew install nvim
+  install_thing nvim
   pip3 install neovim
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -145,7 +116,7 @@ fi
 ## TMUX SETUP
 if ! hash tmux 2>/dev/null; then
   echo "tmux not found, installing it"
-  brew install tmux
+  install_thing tmux
 fi
 
 if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
