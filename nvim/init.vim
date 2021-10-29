@@ -50,6 +50,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'cespare/vim-toml'
+Plug 'tsandall/vim-rego'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
@@ -58,6 +59,9 @@ Plug 'OmniSharp/omnisharp-vim'
 " Various code plugins
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+
+" AutoFormatting
+Plug 'Chiel92/vim-autoformat'
 
 " Docs
 Plug 'rizzatti/dash.vim'
