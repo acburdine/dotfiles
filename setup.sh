@@ -36,7 +36,7 @@ fi
 install_thing fish
 fishpath=$(which fish)
 echo "$fishpath" | sudo tee -a /etc/shells
-chsh -s "$fishpath"
+sudo chsh -s "$fishpath"
 
 fish "$DOTFILES_DIR/fish/setup.fish"
 
