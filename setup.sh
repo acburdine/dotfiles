@@ -56,3 +56,7 @@ fish "$DOTFILES_DIR/nvim/setup.fish"
 install_thing tmux
 
 fish "$DOTFILES_DIR/tmux/setup.fish"
+
+if [ -n "$CODESPACES" ]; then
+  wall "dotfiles setup complete"
+fi
