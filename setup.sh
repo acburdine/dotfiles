@@ -36,7 +36,8 @@ fi
 install_thing fish
 fishpath=$(which fish)
 echo "$fishpath" | sudo tee -a /etc/shells
-sudo chsh -s "$fishpath"
+
+sudo chsh -s "$fishpath" "$(whoami)"
 
 # skip running this in GH Codespaces since it seems to break things
 fish "$DOTFILES_DIR/fish/setup.fish"
