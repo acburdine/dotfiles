@@ -9,10 +9,3 @@ ln -sf $DIR/conf.d/*.fish $HOME/.config/fish/conf.d/
 ln -sf $DIR/functions/*.fish $HOME/.config/fish/functions/
 
 touch $HOME/.dem-tokens && chmod 600 $HOME/.dem-tokens
-
-if ! type -q fisher
-  echo "installing fisher plugin"
-  curl -sL https://git.io/fisher | source
-end
-
-fisher update

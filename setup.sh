@@ -38,10 +38,8 @@ fishpath=$(which fish)
 echo "$fishpath" | sudo tee -a /etc/shells
 sudo chsh -s "$fishpath"
 
-if [ -z "$CODESPACES" ]; then
-  # skip running this in GH Codespaces since it seems to break things
-  fish "$DOTFILES_DIR/fish/setup.fish"
-fi
+# skip running this in GH Codespaces since it seems to break things
+fish "$DOTFILES_DIR/fish/setup.fish"
 
 if [ $GIT_INSTALLED -eq 1 ]; then
   fish "$DOTFILES_DIR/git/setup.fish"
