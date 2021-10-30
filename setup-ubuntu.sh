@@ -35,11 +35,8 @@ sudo add-apt-repository ppa:neovim-ppa/stable >/dev/null 2>/dev/null
 echo "running apt-get update"
 sudo apt-get update >/dev/null 2>/dev/null
 
-if ! hash aws 2>/dev/null; then
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  unzip awscliv2.zip >/dev/null
-  sudo ./aws/install
-  rm -rf awscliv2.zip ./aws/
-
-  if ! hash aws 2>/dev/null; then echo "aws cli install failed!" && exit 1; fi
-fi
+# aws setup
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip >/dev/null
+sudo ./aws/install
+rm -rf awscliv2.zip ./aws/

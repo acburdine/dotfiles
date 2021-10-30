@@ -23,9 +23,7 @@ if ! hash git 2>/dev/null; then
 fi
 
 ## Python Setup (Needed for NeoVim)
-if ! hash python3 2>/dev/null; then
-  install_thing python3
-fi
+install_thing python3
 
 ## Pip3 Setup
 ## NOTE: on macOS this will be installed alongside python3 with brew
@@ -34,31 +32,25 @@ if ! hash pip3 2>/dev/null; then
   install_thing python3-pip
 fi
 
-## install fish
-if ! hash fish 2>/dev/null; then
-  install_thing fish
-  fishpath=$(which fish)
-  echo "$fishpath" | sudo tee -a /etc/shells
-  chsh -s "$fishpath"
+# fish setup
+install_thing fish
+fishpath=$(which fish)
+echo "$fishpath" | sudo tee -a /etc/shells
+chsh -s "$fishpath"
 
-  fish "$DOTFILES_DIR/fish/setup.fish"
-fi
+fish "$DOTFILES_DIR/fish/setup.fish"
 
 if [ $GIT_INSTALLED -eq 1 ]; then
   fish "$DOTFILES_DIR/git/setup.fish"
 fi
 
-## NVIM SETUP
-if ! hash nvim 2>/dev/null; then
-  install_thing neovim
-  pip3 install neovim
+# Neovim setup
+install_thing neovim
+pip3 install neovim
 
-  fish "$DOTFILES_DIR/nvim/setup.fish"
-fi
+fish "$DOTFILES_DIR/nvim/setup.fish"
 
 ## TMUX SETUP
-if ! hash tmux 2>/dev/null; then
-  install_thing tmux
+install_thing tmux
 
-  fish "$DOTFILES_DIR/tmux/setup.fish"
-fi
+fish "$DOTFILES_DIR/tmux/setup.fish"
