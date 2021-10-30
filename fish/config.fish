@@ -17,6 +17,7 @@ alias gl="git log --oneline"
 alias gln="git log --oneline -n"
 alias hs="hub sync"
 alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
+alias tml="tmux ls"
 
 alias ax="aws-okta exec --mfa-factor-type push --mfa-provider OKTA"
 alias avx="aws-vault exec"
