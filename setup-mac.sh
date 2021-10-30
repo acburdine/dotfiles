@@ -35,7 +35,15 @@ if ! hash brew 2>/dev/null; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+## AWS-CLI setup
+if ! hash aws; then
+  curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "/tmp/AWSCLIV2.pkg"
+  sudo installer -pkg /tmp/AWSCLIV2.pkg -target /
+  rm /tmp/AWSCLIV2.pkg
+fi
+
 function install_thing {
   if [ -z "$1" ]; then echo "must specify something to install" && exit 1; fi
+  echo "installing $1"
   brew install "$1"
 }

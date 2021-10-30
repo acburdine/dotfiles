@@ -41,6 +41,7 @@
 	children = "!bash -c 'c=${1:-HEAD}; set -- $(git rev-list --all --not \"$c\"^@ --children | grep $(git rev-parse \"$c\") ); shift; echo $1' -"
 	mrg = merge
 	rs = reset
+  mainfix = symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 
 [user]
 	name = Austin Burdine
@@ -50,7 +51,17 @@
 	username = acburdine
 
 [core]
-	excludesfile = {{DOTFILES_DIR}}/git/gitignore_global
+	excludesfile = ~/.config/git/gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [hub]
 	protocol = https
+
+[push]
+  default = current
+
+[commit]
+  gpgsign = true
+
+[interactive]
+  diffFilter = diff-so-fancy --patch

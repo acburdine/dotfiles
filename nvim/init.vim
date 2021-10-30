@@ -3,6 +3,14 @@ if &shell =~# 'fish$'
   set shell=bash
 endif
 
+syntax on
+
+let data_dir = stdpath("data") . "/site"
+
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute "!curl -fLo".data_dir."/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 " Theme-related plugins
 Plug 'fenetikm/falcon'
@@ -90,7 +98,6 @@ set nowrap
 set formatoptions-=tc
 
 " Theme/Display Configuration
-syntax on
 silent! colorscheme onedark
 set background=dark
 set termguicolors

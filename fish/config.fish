@@ -1,5 +1,4 @@
 # custom path exports
-set -x GOPATH (go env GOPATH)
 set -x PATH /usr/local/bin /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin
 
 set -x EDITOR nvim
