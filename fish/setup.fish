@@ -12,7 +12,5 @@ touch $HOME/.dem-tokens && chmod 600 $HOME/.dem-tokens
 
 if ! type -q fisher
   echo "installing fisher plugin"
-  curl -sL https://git.io/fisher | source
+  curl -sL https://git.io/fisher | source && fisher update
 end
-
-fisher update
