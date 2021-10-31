@@ -11,7 +11,7 @@ ln -sf $DIR/functions/*.fish $HOME/.config/fish/functions/
 touch $HOME/.dem-tokens && chmod 600 $HOME/.dem-tokens
 
 # codespaces does weird things with this, so we're ignoring it
-if test -n $CODESPACES && ! type -q fisher
+if test -z $CODESPACES && ! type -q fisher
   echo "fisher not found, installing it"
   fish -c "curl -sL https://git.io/fisher | source && fisher update" 2>/dev/null
 end
