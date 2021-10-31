@@ -1,11 +1,19 @@
 # custom path exports
-set -x PATH /usr/local/bin /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin
+#
+# NOTE: it looks like homebrew is here multiple times, this is just easier than trying
+# to do os-specific logic
+set -x PATH /usr/local/bin /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin \
+            /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin \
+            /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin
 
 set -x EDITOR nvim
 
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/library
 
 set -x GPG_TTY (tty)
+
+# disable fish greeting
+set fish_greeting
 
 alias ls="ls -GFh"
 alias fp="nvim ~/.config/fish/config.fish"
@@ -48,9 +56,3 @@ end
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/bin/gcloud/path.fish.inc" ]; source "$HOME/bin/gcloud/path.fish.inc"; end
-
-if ! type -q fisher && status --is-login
-  echo "fisher not found, installing it"
-  curl -sL https://git.io/fisher | source && fisher update
-end
-

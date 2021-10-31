@@ -9,3 +9,10 @@ ln -sf $DIR/conf.d/*.fish $HOME/.config/fish/conf.d/
 ln -sf $DIR/functions/*.fish $HOME/.config/fish/functions/
 
 touch $HOME/.dem-tokens && chmod 600 $HOME/.dem-tokens
+
+if ! type -q fisher
+  echo "fisher not found, installing it"
+
+  # run this in a subshell to prevent tide's interactive config prompt from blocking the script
+  fish -c "curl -sL https://git.io/fisher | source && fisher update"
+end

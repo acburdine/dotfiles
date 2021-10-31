@@ -1,42 +1,28 @@
 #!/bin/bash
 
-# fix for containers
+echo "
+-----------------------------------
+acburdine's dotfiles - ubuntu setup
+-----------------------------------
+"
+
 if ! hash sudo 2>/dev/null && [ "$EUID" -eq 0 ]; then
-  echo "installing sudo"
-  apt-get update >/dev/null 2>/dev/null && apt-get install -qq -y sudo >/dev/null 2>/dev/null
+  echo "sudo not found, installing it..."
+  apt-get update &>/dev/null && apt-get install -y sudo &>/dev/null
 fi
 
-function install_thing {
-  if [ -z "$1" ]; then echo "must specify something to install" && exit 1; fi
-  echo "installing $1"
-  sudo apt-get install -y "$1" >/dev/null 2>/dev/null
-}
+echo "running apt-get update..."
+sudo apt-get update &>/dev/null
 
-# fix for missing add-apt-repository command
-if ! hash add-apt-repository 2>/dev/null; then install_thing software-properties-common; fi
+echo "ensuring necessary base components are installed (curl, git, unzip, gcc)..."
+sudo apt-get install -y curl git unzip gcc &>/dev/null
 
-# ensure curl's installed
-if ! hash curl 2>/dev/null; then install_thing curl; fi
+echo "checking if aws-cli is installed"
+if ! hash aws 2>/dev/null; then
+  echo "aws-cli not found, installing it now..."
 
-# ensure unzip's installed
-if ! hash unzip 2>/dev/null; then install_thing unzip; fi
-
-# add various apt repositories
-echo "adding fish-shell ppa"
-sudo add-apt-repository ppa:fish-shell/release-3 >/dev/null 2>/dev/null
-
-echo "adding diff-so-fancy ppa"
-sudo add-apt-repository ppa:aos1/diff-so-fancy >/dev/null 2>/dev/null
-
-echo "adding neovim ppa"
-sudo add-apt-repository ppa:neovim-ppa/stable >/dev/null 2>/dev/null
-
-# apt-update
-echo "running apt-get update"
-sudo apt-get update >/dev/null 2>/dev/null
-
-# aws setup
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip >/dev/null
-sudo ./aws/install
-rm -rf awscliv2.zip ./aws/
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip >/dev/null
+  sudo ./aws/install
+  rm -rf awscliv2.zip ./aws/
+fi
