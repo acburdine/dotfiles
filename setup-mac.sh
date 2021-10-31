@@ -1,6 +1,18 @@
 #!/bin/bash
 
+echo "
+----------------------------------
+acburdine's dotfiles - macOS setup
+----------------------------------
+"
+
 # macOS specific setup
+
+echo "checking that xcode-select is installed"
+if [ -z "$(xcode-select -p)" ]; then
+  echo "xcode-select not installed, installing it now..."
+  xcode-select --install
+fi
 
 # Key Repeat
 defaults write -g InitialKeyRepeat -int 10 # 150 ms
@@ -29,21 +41,11 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Install One Dark itermcolors theme
 open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
 
-## Brew Setup
-if ! hash brew 2>/dev/null; then
-  echo "Homebrew not found, installing it"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+echo "checking if aws-cli is installed"
+if ! hash aws 2>/dev/null; then
+  echo "aws-cli not found, installing it now..."
 
-## AWS-CLI setup
-if ! hash aws; then
   curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "/tmp/AWSCLIV2.pkg"
   sudo installer -pkg /tmp/AWSCLIV2.pkg -target /
   rm /tmp/AWSCLIV2.pkg
 fi
-
-function install_thing {
-  if [ -z "$1" ]; then echo "must specify something to install" && exit 1; fi
-  echo "installing $1"
-  brew install "$1"
-}
