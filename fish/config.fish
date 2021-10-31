@@ -12,6 +12,10 @@ set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/ru
 
 set -x GPG_TTY (tty)
 
+# ensure SHELL is set correctly for things like tmux
+# (environments like Codespaces don't normally set it correctly)
+set -x SHELL (status fish-path)
+
 # disable fish greeting
 set fish_greeting
 
