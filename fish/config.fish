@@ -56,3 +56,8 @@ end
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/bin/gcloud/path.fish.inc" ]; source "$HOME/bin/gcloud/path.fish.inc"; end
+
+if test -z $CODESPACES && ! type -q fisher && status --is-login
+  echo "fisher not found, installing it"
+  fish -c "curl -sL https://git.io/fisher | source && fisher update" 2>/dev/null
+end
