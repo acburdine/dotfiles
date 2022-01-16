@@ -3,6 +3,7 @@ set DIR (dirname (status --current-filename))
 mkdir -p $HOME/.config/nvim/
 ln -sf "$DIR/init.vim" $HOME/.config/nvim/init.vim
 ln -sf "$DIR/ftplugin" $HOME/.config/nvim/ftplugin
+ln -sf "$DIR/lua" $HOME/.config/nvim/lua
 
 if ! type -q node
   nvm install lts

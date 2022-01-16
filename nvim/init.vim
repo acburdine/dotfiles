@@ -18,7 +18,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 
 " Linting
-Plug 'w0rp/ale'
+Plug 'mfussenegger/nvim-lint'
 
 " EditorConfig
 Plug 'editorconfig/editorconfig-vim'
@@ -56,9 +56,11 @@ Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'cespare/vim-toml'
 Plug 'tsandall/vim-rego'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'javascriptreact', 'typescriptreact'] }
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
@@ -134,7 +136,11 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/node_modules/*,*.class
 
 " NerdTree Configuration
 let NERDTreeShowHidden=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+augroup nerdtree
+  au!
+  au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup end
 
 " ctrl-p config
 let g:ctrlp_show_hidden = 1
@@ -205,7 +211,10 @@ nmap <leader>j :lnext<cr>
 nmap <leader>k :lprevious<cr>
 
 " Terraform Settings
-autocmd BufWritePost *.tf if &filetype == "terraform" | exec 'TerraformFmt' | endif
+augroup terraform
+  au!
+  au BufWritePost *.tf if &filetype == "terraform" | exec 'TerraformFmt' | endif
+augroup end
 
 let g:terraform_fold_sections=1
 
@@ -217,16 +226,43 @@ let g:OmniSharp_server_use_mono = 1
 let g:mix_format_on_save = 1
 let g:mix_format_silent_errors = 1
 
-" ALE
-let g:ale_linters = {
-\ 'cs': ['OmniSharp']
-\}
+" Linting
+lua <<EOF
+require('lint').linters.phpcs = require('phpcs_lint')
+
+require('lint').linters_by_ft = {
+  javascript = {'eslint',},
+  typescript = {'eslint',},
+  javascriptreact = {'eslint',},
+  typescriptreact = {'eslint',},
+  go = {'golangcilint',},
+  yaml = {'yamllint',},
+  markdown = {'vale',},
+  gitcommit = {'codespell',},
+  php = {'phpcs',},
+}
+EOF
+
+augroup lint
+  au!
+  au BufWritePost <buffer> lua require('lint').try_lint()
+  au BufEnter <buffer> lua require('lint').try_lint()
+augroup end
+
+" Prettier
+augroup js
+  au!
+  au BufWritePre <buffer> if exists(':Prettier') | exec 'Prettier' | endif
+augroup end
 
 " Rust
 let g:rustfmt_autosave = 1
 
 " EJS Syntax View
-autocmd BufNewFile,BufRead *.ejs set filetype=html
+augroup ejs
+  au!
+  au BufNewFile,BufRead *.ejs set filetype=html
+augroup end
 
 " SQL
 let g:omni_sql_no_default_maps = 1
