@@ -4,7 +4,8 @@
 # to do os-specific logic
 set -x PATH /usr/local/bin /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin \
             /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin \
-            /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin
+            /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin \
+            /usr/local/opt/php/bin /usr/local/opt/php/sbin
 
 set -x EDITOR nvim
 
