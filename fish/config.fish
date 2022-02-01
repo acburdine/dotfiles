@@ -1,5 +1,8 @@
 # custom path exports
-#
+if type -q go
+  set -x GOPATH (go env GOPATH)
+end
+
 # NOTE: it looks like homebrew is here multiple times, this is just easier than trying
 # to do os-specific logic
 set -x PATH /usr/local/bin /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin \
@@ -28,6 +31,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git log --oneline"
 alias gln="git log --oneline -n"
+alias gg="git grep"
 alias hs="hub sync"
 alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
 alias tml="tmux ls"
