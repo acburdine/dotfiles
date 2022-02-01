@@ -58,6 +58,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'cespare/vim-toml'
 Plug 'tsandall/vim-rego'
+Plug 'mechatroner/rainbow_csv'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'javascriptreact', 'typescriptreact'] }
@@ -209,6 +210,8 @@ let g:go_list_type = 'locationlist'
 nmap <leader>gt :GoTest<cr>
 nmap <leader>j :lnext<cr>
 nmap <leader>k :lprevious<cr>
+nmap <leader>ra :RainbowAlign<cr>
+nmap <leader>rs :RainbowShrink<cr>
 
 " Terraform Settings
 augroup terraform
@@ -228,8 +231,6 @@ let g:mix_format_silent_errors = 1
 
 " Linting
 lua <<EOF
-require('lint').linters.phpcs = require('phpcs_lint')
-
 require('lint').linters_by_ft = {
   javascript = {'eslint',},
   typescript = {'eslint',},
@@ -269,6 +270,10 @@ let g:omni_sql_no_default_maps = 1
 
 " Shell
 let g:shfmt_fmt_on_save = 1
+
+" CSV
+let g:rbql_with_headers = 1
+let g:rbql_backend_language = 'js'
 
 " CoC Extensions
 let g:coc_global_extensions = [
