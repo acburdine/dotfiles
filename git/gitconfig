@@ -37,11 +37,15 @@
 	brm = branch -m
 	p = "!git pull --ff-only"
 	fixup = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
-	cleanup = "!git branch --merged | grep -v -P '^\\*|main|develop' | xargs -n1 -r git branch -d"
+	default = "!git remote show origin | grep \"HEAD branch\" | sed 's/.*: //'"
+	cleanup = "!bash -c 'br=$(git branch --show-current); git swm; git branch -D $br'"
 	children = "!bash -c 'c=${1:-HEAD}; set -- $(git rev-list --all --not \"$c\"^@ --children | grep $(git rev-parse \"$c\") ); shift; echo $1' -"
 	mrg = merge
 	rs = reset
-  mainfix = symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+	mainfix = symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+	g = grep
+	sw = switch
+	swm = "!git switch $(git default)"
 
 [user]
 	name = Austin Burdine
