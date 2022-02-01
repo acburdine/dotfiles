@@ -38,6 +38,9 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
+# Enable MacOS Keyboard Control
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
 # Install One Dark itermcolors theme
 open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
 
