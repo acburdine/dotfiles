@@ -43,12 +43,3 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Install One Dark itermcolors theme
 open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
-
-echo "checking if aws-cli is installed"
-if ! hash aws 2>/dev/null; then
-  echo "aws-cli not found, installing it now..."
-
-  curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "/tmp/AWSCLIV2.pkg"
-  sudo installer -pkg /tmp/AWSCLIV2.pkg -target /
-  rm /tmp/AWSCLIV2.pkg
-fi
