@@ -59,6 +59,7 @@ Plug 'mhinz/vim-mix-format'
 Plug 'cespare/vim-toml'
 Plug 'tsandall/vim-rego'
 Plug 'mechatroner/rainbow_csv'
+Plug 'bfontaine/Brewfile.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'javascriptreact', 'typescriptreact'] }
