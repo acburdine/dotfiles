@@ -27,16 +27,11 @@ fi
 
 cd "$HOME" || exit # ensure we're in home folder
 
-echo "installing all required tools"
+echo "installing apps"
 
-# install all the things!
-brew install python3 fish git diff-so-fancy neovim tmux
-pip3 install neovim
-
-fishpath=$(which fish)
-echo "$fishpath" | sudo tee -a /etc/shells
-
-sudo chsh -s "$fishpath" "$(whoami)"
+if [ "$(uname)" == "Darwin" ]; then
+  source "$DOTFILES_DIR/setup-apps.sh"
+fi
 
 echo "running individual setup scripts for different tools"
 fish "$DOTFILES_DIR/fish/setup.fish"
