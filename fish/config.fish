@@ -36,10 +36,12 @@ alias hs="hub sync"
 alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
 alias tml="tmux ls"
 
-alias ax="aws-okta exec --mfa-factor-type push --mfa-provider OKTA"
 alias avx="aws-vault exec"
 alias tfinit="terraform init"
 alias tfv="terraform validate"
+
+# because I was tired of googling this each time
+alias portsinuse="sudo lsof -i -P | grep LISTEN"
 
 # editor aliases
 alias vi="nvim"
@@ -59,10 +61,6 @@ if test -e ~/.asdf/asdf.fish
   source ~/.asdf/asdf.fish
 end
 
-function ch
-  aws-okta exec $argv[1] -- chamber $argv[2..-1]
-end
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/bin/gcloud/path.fish.inc" ]; source "$HOME/bin/gcloud/path.fish.inc"; end
 
@@ -70,3 +68,6 @@ if test -n $CODESPACES && ! type -q fisher && status --is-login
   echo "fisher not found, installing it"
   fish -c "curl -sL https://git.io/fisher | source && fisher update" 2>/dev/null
 end
+
+# always clear at the end
+clear

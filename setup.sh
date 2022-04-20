@@ -7,6 +7,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 if [ "$(uname)" == "Darwin" ]; then
   source "$DOTFILES_DIR/setup-mac.sh"
 elif [ "$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d \")" == "Ubuntu" ]; then
+  export CI=1
   source "$DOTFILES_DIR/setup-ubuntu.sh"
 else
   echo "only macOS and Ubuntu distros are currently supported." && exit 1
@@ -17,7 +18,7 @@ if ! hash brew 2>/dev/null; then
   echo "brew not found, installing it now..."
 
   # note: the CI env var here is to make it non-interactive
-  CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # temporary path modification so that brew is available later on in the script
   # brew itself will be available after setup via the fish config

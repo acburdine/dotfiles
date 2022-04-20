@@ -63,6 +63,7 @@ Plug 'bfontaine/Brewfile.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'javascriptreact', 'typescriptreact'] }
+Plug 'vim-scripts/nginx.vim'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
@@ -162,6 +163,7 @@ nmap <leader>nt :NERDTree<cr>
 nmap <leader>ntf :NERDTreeFocus<cr>
 nmap <leader>md :LivedownPreview<cr>
 nmap <leader>cr :CocRestart<cr>
+nmap <leader>ts :CocCommand tsserver.reloadProjects<cr>
 
 nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -255,6 +257,11 @@ augroup end
 augroup js
   au!
   au BufWritePre <buffer> if exists(':Prettier') | exec 'Prettier' | endif
+augroup end
+
+augroup nginx
+  au!
+  au BufRead,BufNewFile /usr/local/etc/nginx/* if &ft == '' | setfiletype nginx endif
 augroup end
 
 " Rust

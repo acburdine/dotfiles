@@ -19,10 +19,11 @@ open "https://monolisa.dev/orders"
 
 read -p "Press Enter once font has been downloaded"
 
-unzip -d "$HOME/Downloads" "$HOME/Downloads/MonoLisa-personal.zip"
+mkdir -p "$HOME/Downloads/MonoLisa-personal"
+unzip -d "$HOME/Downloads/MonoLisa-personal" "$HOME/Downloads/MonoLisa-personal.zip"
 
 set +e
-docker run -v "$HOME/Downloads/MonoLisa-personal/ttf:/in" -v "$HOME/Downloads/MonoLisa-patched:/out" --rm nerdfonts/patcher -c --careful -q
+docker run -it -v "$HOME/Downloads/MonoLisa-personal/ttf:/in" -v "$HOME/Downloads/MonoLisa-patched:/out" --rm nerdfonts/patcher -c --careful -q
 set -e
 
 open $HOME/Downloads/MonoLisa-patched/*.ttf

@@ -38,11 +38,12 @@ brew "sl"
 brew "task"
 brew "terraform"
 brew "tmux"
+brew "tmuxinator"
 brew "vale"
 brew "vim"
 brew "wget"
 brew "yamllint"
-brew "yarn", args: ["without-node"]
+brew "yarn"
 
 # Cask Applications
 cask "alfred"
@@ -54,7 +55,8 @@ cask "gpg-suite-no-mail"
 cask "google-cloud-sdk"
 cask "iterm2"
 cask "rectangle"
-cask "slack"
+cask "spotify"
+# cask "slack"
 
 # App Store applications
 mas "iA Writer", id: 775737590
