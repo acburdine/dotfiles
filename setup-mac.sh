@@ -23,9 +23,6 @@ defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write 'Apple Global Domain' com.apple.mouse.tapBehavior 1
 
-# Disable "Are you sure you want to open this application" dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
@@ -40,6 +37,3 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Enable MacOS Keyboard Control
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-# Install One Dark itermcolors theme
-open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
