@@ -124,7 +124,7 @@ let g:lightline = {
   \   'right': [['filetype']]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'FugitiveHead'
   \ },
   \ }
 
