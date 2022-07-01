@@ -56,7 +56,7 @@ cask "google-cloud-sdk"
 cask "iterm2"
 cask "rectangle"
 cask "spotify"
-# cask "slack"
+cask "slack"
 
 # App Store applications
 mas "iA Writer", id: 775737590
