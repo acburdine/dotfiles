@@ -49,7 +49,7 @@
 
 [user]
 	name = Austin Burdine
-	email = acburdine@gmail.com
+	email = austin@burdine.me
 
 [credential "https://github.com"]
 	username = acburdine
@@ -65,7 +65,8 @@
   default = current
 
 [commit]
-  gpgsign = true
+	gpgsign = true
+	signingkey = FB38863ACF00D553
 
 [interactive]
   diffFilter = diff-so-fancy --patch
