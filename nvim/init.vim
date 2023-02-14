@@ -64,6 +64,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'javascriptreact', 'typescriptreact'] }
 Plug 'vim-scripts/nginx.vim'
+Plug 'mustache/vim-mustache-handlebars'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': 'yarn install --frozen-lockfile'}
@@ -173,25 +174,39 @@ inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(
 " Because I fat-finger :W instead of :w all the time
 command! W w
 
-" Fix coc-nvim scrolling
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <expr><C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Right>"
-inoremap <expr><C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Left>"
+" coc remap settings
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Autocomplete Settings
 set updatetime=250
-set completeopt+=noinsert
-set completeopt+=noselect
-set completeopt-=preview
 
 " Path to python interpreter for neovim
 let g:python3_host_prog = '/usr/local/bin/python3'
 " Skip the check of neovim module
 let g:python3_host_skip_check = 1
-
-let g:deoplete#enable_at_startup = 1
 
 " Go settings
 let g:go_highlight_build_constraints = 1
@@ -218,8 +233,8 @@ nmap <leader>rs :RainbowShrink<cr>
 
 " Terraform Settings
 augroup terraform
-  au!
-  au BufWritePost *.tf if &filetype == "terraform" | exec 'TerraformFmt' | endif
+  autocmd! * <buffer>
+  autocmd BufWritePost *.tf if &filetype == "terraform" | exec 'TerraformFmt' | endif
 augroup end
 
 let g:terraform_fold_sections=1
@@ -248,29 +263,29 @@ require('lint').linters_by_ft = {
 EOF
 
 augroup lint
-  au!
-  au BufWritePost <buffer> lua require('lint').try_lint()
-  au BufEnter <buffer> lua require('lint').try_lint()
-augroup end
+  autocmd! * <buffer>
+  autocmd BufWritePost <buffer> lua require('lint').try_lint()
+  autocmd BufEnter <buffer> lua require('lint').try_lint()
+augroup END
 
 " Prettier
 augroup js
-  au!
-  au BufWritePre <buffer> if exists(':Prettier') | exec 'Prettier' | endif
-augroup end
+  autocmd! * <buffer>
+  autocmd BufWritePre <buffer> if exists(':Prettier') | exec 'Prettier' | endif
+augroup END
 
 augroup nginx
-  au!
-  au BufRead,BufNewFile /usr/local/etc/nginx/* if &ft == '' | setfiletype nginx endif
-augroup end
+  autocmd! * <buffer>
+  autocmd BufRead,BufNewFile /usr/local/etc/nginx/* if &ft == '' | setfiletype nginx endif
+augroup END
 
 " Rust
 let g:rustfmt_autosave = 1
 
 " EJS Syntax View
 augroup ejs
-  au!
-  au BufNewFile,BufRead *.ejs set filetype=html
+  autocmd! * <buffer>
+  autocmd BufNewFile,BufRead *.ejs set filetype=html
 augroup end
 
 " SQL
