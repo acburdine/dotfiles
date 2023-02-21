@@ -1,11 +1,15 @@
+-- NOTE: this should not be required in init.lua, it's required
+-- during lazy plugin setup
 require("nvim-tree").setup({
   disable_netrw = true,
+  hijack_netrw = true,
   sort_by = "case_sensitive",
   view = {
     width = 30,
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
+        { key = "O", action = "cd" },
       },
     },
   },
@@ -29,9 +33,13 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
       return
     end
 
+    if directory then
+      vim.cmd.cd(data.file)
+    end
+
     -- open the tree
     require("nvim-tree.api").tree.open()
   end
 })
 
-vim.keymap.set("n", "<leader>tr", vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
