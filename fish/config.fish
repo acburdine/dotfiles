@@ -20,6 +20,9 @@ set -x GPG_TTY (tty)
 # (environments like Codespaces don't normally set it correctly)
 set -x SHELL (status fish-path)
 
+# disable homebrew google analytics
+set -x HOMEBREW_NO_GOOGLE_ANALYTICS 1
+
 # disable fish greeting
 set fish_greeting
 
