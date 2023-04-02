@@ -1,7 +1,7 @@
 local prettier = require("prettier")
 
 prettier.setup({
-  bin = 'prettier', -- or `'prettierd'` (v0.22+)
+  bin = 'prettierd',
   filetypes = {
     "css",
     "graphql",

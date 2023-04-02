@@ -15,7 +15,7 @@ require("lazy").setup({
   {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
-    dependencies = {"nvim-tree/nvim-web-devicons"}
+    dependencies = {"nvim-tree/nvim-web-devicons"},
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -29,6 +29,11 @@ require("lazy").setup({
     config = function()
       vim.cmd.colorscheme("onedark")
     end
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+    priority = 1000
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -66,9 +71,30 @@ require("lazy").setup({
   {"itchyny/lightline.vim"},
   {
     "windwp/nvim-autopairs",
+    lazy = false,
+    dependencies={"nvim-treesitter/nvim-treesitter"},
     config = function()
-      require("nvim-autopairs").setup {}
+      local npairs = require("nvim-autopairs")
+      npairs.setup {
+        check_ts = true
+      }
+      npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
     end
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event="InsertEnter",
+    dependencies={"nvim-treesitter/nvim-treesitter"},
+    config = function()
+      require("nvim-ts-autotag").setup {
+        enable = true
+      }
+    end
+  },
+  {
+    "RRethy/nvim-treesitter-endwise",
+    dependencies={"nvim-treesitter/nvim-treesitter"},
+    event = "InsertEnter"
   },
   {"tpope/vim-eunuch"},
   {"editorconfig/editorconfig-vim"},
