@@ -36,3 +36,11 @@ vim.keymap.set("", "<C-j>", "<C-W>j")
 vim.keymap.set("", "<C-k>", "<C-W>k")
 vim.keymap.set("", "<C-h>", "<C-W>h")
 vim.keymap.set("", "<C-l>", "<C-W>l")
+
+vim.keymap.set("i", "<C-h>", function ()
+  require("copilot.suggestion").prev()
+end)
+
+vim.keymap.set("i", "<C-l>", function ()
+  require("copilot.suggestion").next()
+end)

@@ -12,6 +12,18 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-v>'] = cmp.mapping.confirm({ select = true }),
   ['<C-space>'] = cmp.mapping.complete(),
+  ['<Tab>'] = cmp.mapping(function (fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+--    elseif require("copilot.suggestion").is_visible() then
+--      require("copilot.suggestion").accept()
+    else
+      fallback()
+    end
+  end, {
+    'i',
+    's',
+  })
 })
 
 local cmp_config = lsp.defaults.cmp_config({})

@@ -118,5 +118,15 @@ require("lazy").setup({
     config = function()
       require("trouble").setup()
     end
-  }
+  },
+--  {
+--    "zbirenbaum/copilot.lua",
+--    config = function()
+--      require("copilot").setup({
+--        suggestion = {
+--          auto_trigger = true
+--        }
+--      })
+--    end
+--  },
 })
