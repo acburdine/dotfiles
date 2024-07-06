@@ -15,8 +15,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<Tab>'] = cmp.mapping(function (fallback)
     if cmp.visible() then
       cmp.select_next_item()
---    elseif require("copilot.suggestion").is_visible() then
---      require("copilot.suggestion").accept()
+    elseif require("copilot.suggestion").is_visible() then
+      require("copilot.suggestion").accept()
     else
       fallback()
     end
@@ -154,6 +154,7 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.fish_indent,
+    null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.hclfmt,
     null_ls.builtins.formatting.lua_format,
     null_ls.builtins.formatting.nginx_beautifier,
@@ -164,5 +165,12 @@ null_ls.setup({
   }
 })
 
-lsp.setup()
+require('lspconfig').yamlls.setup({
+  settings = {
+    yaml = {
+      kubernetes = "yaml/**/*.yaml"
+    }
+  }
+})
 
+lsp.setup()

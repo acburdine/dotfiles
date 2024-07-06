@@ -119,14 +119,27 @@ require("lazy").setup({
       require("trouble").setup()
     end
   },
---  {
---    "zbirenbaum/copilot.lua",
---    config = function()
---      require("copilot").setup({
---        suggestion = {
---          auto_trigger = true
---        }
---      })
---    end
---  },
+  {
+    "kkoomen/vim-doge",
+    build = ':call doge#install()'
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          auto_trigger = true
+        }
+      })
+    end
+  },
+  {'isobit/vim-caddyfile'},
+  {
+    "ray-x/go.nvim",
+    config = function()
+      require("go").setup()
+    end,
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()'
+  }
 })
