@@ -77,13 +77,6 @@ if test -n $CODESPACES && ! type -q fisher && status --is-login
     fish -c "curl -sL https://git.io/fisher | source && fisher update" 2>/dev/null
 end
 
-# copied from oh-my-fish/plugin-aws - we have to do this here because otherwise
-# the aws_completer path from homebrew doesn't get picked up
-if not set -q aws_completer_path
-    set -g aws_completer_path (type -P aws_completer 2> /dev/null)
-    or echo "aws: unable to find aws_completer, completions unavaliable"
-end
-
 function __check_nvm --on-variable PWD --description 'automatic nvm use'
     if test -f .nvmrc
         set node_version (node -v)
