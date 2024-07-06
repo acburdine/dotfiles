@@ -1,3 +1,8 @@
+# if we're in cloudsdk, don't do anything because it messes stuff up
+if set -q CLOUDSDK_WRAPPER && test "$CLOUDSDK_WRAPPER" = 1
+    return
+end
+
 # custom path exports
 if type -q go
     set -x GOPATH (go env GOPATH)
@@ -5,7 +10,7 @@ end
 
 # NOTE: it looks like homebrew is here multiple times, this is just easier than trying
 # to do os-specific logic
-set -x PATH /usr/local/bin /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin \
+set -x PATH /usr/local/bin /opt/homebrew/bin /opt/homebrew/opt/ruby/bin /home/linuxbrew/.linuxbrew/bin \
     /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin \
     /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin \
     /usr/local/opt/php/bin /usr/local/opt/php/sbin
@@ -95,6 +100,19 @@ function __check_nvm --on-variable PWD --description 'automatic nvm use'
 end
 
 __check_nvm
+
+tide configure --auto --style=Rainbow --prompt_colors='True color' \
+    --show_time='24-hour format' \
+    --rainbow_prompt_separators=Slanted \
+    --powerline_prompt_heads=Sharp \
+    --powerline_prompt_tails=Flat \
+    --powerline_prompt_style='Two lines, character' \
+    --prompt_connection=Dotted \
+    --powerline_right_prompt_frame=No \
+    --prompt_connection_andor_frame_color=Lightest \
+    --prompt_spacing=Sparse \
+    --icons='Few icons' \
+    --transient=Yes
 
 # always clear at the end
 clear
