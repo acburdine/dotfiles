@@ -2,12 +2,8 @@
 
 set -e
 
-brew bundle install --file="$DOTFILES_DIR/apps/Brewfile"
-pip3 install neovim
-
-# ensure node 16 gets installed
-# TODO: update to node 18 whenever that becomes necessary
-brew link node@16 --force --overwrite
+# brew bundle install --file="$DOTFILES_DIR/apps/Brewfile"
+# pip3 install neovim
 
 # fish shell config
 fishpath=$(which fish)
@@ -19,7 +15,7 @@ fi
 if ! defaultbrowser | grep -q "^\* firefox"; then
   echo "setting firefox as default browser"
   # set firefox as default browser
-  defaultbrowser firefox
+  # defaultbrowser firefox
 fi
 
 # Install One Dark itermcolors theme
