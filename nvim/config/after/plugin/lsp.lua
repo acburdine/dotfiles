@@ -152,11 +152,9 @@ local null_opts = lsp.build_options("null-ls", {
 null_ls.setup({
   on_attach = null_opts.on_attach,
   sources = {
-    null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.fish_indent,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.hclfmt,
-    null_ls.builtins.formatting.lua_format,
     null_ls.builtins.formatting.nginx_beautifier,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.scalafmt,

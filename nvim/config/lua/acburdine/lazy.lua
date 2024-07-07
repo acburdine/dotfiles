@@ -98,7 +98,7 @@ require("lazy").setup({
   },
   {"tpope/vim-eunuch"},
   {"editorconfig/editorconfig-vim"},
-  {"jose-elias-alvarez/null-ls.nvim"},
+  {"nvimtools/none-ls.nvim"},
   {"MunifTanjim/prettier.nvim"},
   {
     "numToStr/Comment.nvim",

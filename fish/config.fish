@@ -53,6 +53,8 @@ alias portsinuse="sudo lsof -i -P | grep LISTEN"
 alias vi="nvim"
 alias vim="nvim"
 
+alias lg="lazygit"
+
 alias gentfdocs="terraform-docs markdown table . > README.md"
 
 if test -e ~/.config/fish/aliases.fish
