@@ -11,7 +11,7 @@ end
 # NOTE: it looks like homebrew is here multiple times, this is just easier than trying
 # to do os-specific logic
 set -x PATH /usr/local/bin /opt/homebrew/bin /opt/homebrew/opt/ruby/bin /home/linuxbrew/.linuxbrew/bin \
-    /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin \
+    /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin $HOME/.local/bin \
     /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin \
     /usr/local/opt/php/bin /usr/local/opt/php/sbin
 
@@ -56,6 +56,9 @@ alias vim="nvim"
 alias lg="lazygit"
 
 alias gentfdocs="terraform-docs markdown table . > README.md"
+
+alias hotspot="sudo networksetup -setmanual Wi-Fi 172.20.10.3 255.255.255.240 172.20.10.1"
+alias unhotspot="sudo networksetup -setdhcp Wi-Fi"
 
 if test -e ~/.config/fish/aliases.fish
     source ~/.config/fish/aliases.fish

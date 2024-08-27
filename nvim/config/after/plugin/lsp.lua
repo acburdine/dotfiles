@@ -12,37 +12,21 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-v>'] = cmp.mapping.confirm({ select = true }),
   ['<C-space>'] = cmp.mapping.complete(),
-  ['<Tab>'] = cmp.mapping(function (fallback)
-    if cmp.visible() then
-      cmp.select_next_item()
-    elseif require("copilot.suggestion").is_visible() then
-      require("copilot.suggestion").accept()
-    else
-      fallback()
-    end
-  end, {
-    'i',
-    's',
-  })
 })
 
 local cmp_config = lsp.defaults.cmp_config({})
 
--- This exists to disable code completion in code comments because
--- that has caused no small amount of consternation
-cmp_config.enabled = function()
-  if require("cmp.config.context").in_treesitter_capture("comment") == true
-    or require("cmp.config.context").in_syntax_group("Comment") then
-      return false
-    else
-      return true
-    end
-end
-
 cmp.setup(cmp_config)
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+  mapping = cmp_mappings,
+  sources = {
+    {name = 'copilot'},
+    {name = 'path'},
+    {name = 'nvim_lsp'},
+    {name = 'buffer', keyword_length = 3},
+    {name = 'luasnip', keyword_length = 2},
+  },
 })
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")

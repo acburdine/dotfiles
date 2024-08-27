@@ -23,11 +23,11 @@ require("lazy").setup({
     dependencies={"nvim-lua/plenary.nvim"}
   },
   {
-    "joshdick/onedark.vim",
+    "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("onedark")
+      require("onedark").load()
     end
   },
   {
@@ -68,7 +68,17 @@ require("lazy").setup({
       {'rafamadriz/friendly-snippets'},
     }
   },
-  {"itchyny/lightline.vim"},
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'onedark'
+        }
+      }
+    end
+  },
   {
     "windwp/nvim-autopairs",
     lazy = false,
@@ -127,10 +137,15 @@ require("lazy").setup({
     "zbirenbaum/copilot.lua",
     config = function()
       require("copilot").setup({
-        suggestion = {
-          auto_trigger = true
-        }
+        suggestion = { enabled = false },
+        panel = { enabled = false },
       })
+    end
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
     end
   },
   {'isobit/vim-caddyfile'},
