@@ -1,0 +1,6 @@
+import = ["~/.config/sesh/personal.toml", "~/.config/sesh/work.toml"]
+
+[[session]]
+name = "dotfiles"
+path = "~/dotfiles"
+startup_command = "nvim ."

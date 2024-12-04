@@ -15,7 +15,7 @@ fi
 if ! defaultbrowser | grep -q "^\* firefox"; then
   echo "setting firefox as default browser"
   # set firefox as default browser
-  # defaultbrowser firefox
+  defaultbrowser firefox
 fi
 
 # Install One Dark itermcolors theme

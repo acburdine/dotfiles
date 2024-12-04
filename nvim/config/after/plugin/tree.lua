@@ -103,9 +103,6 @@ require("nvim-tree").setup({
   renderer = {
     group_empty = true,
   },
-  filters = {
-    dotfiles = true,
-  },
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {

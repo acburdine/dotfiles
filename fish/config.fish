@@ -40,6 +40,7 @@ alias gg="git grep"
 alias hs="hub sync"
 alias chromeguest="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --guest"
 alias tml="tmux ls"
+alias tm='sesh connect "$(sesh list -i | gum filter --limit 1 --placeholder \'Pick a sesh\' --prompt='⚡')"'
 
 alias avx="aws-vault exec"
 alias tfinit="terraform init"
@@ -59,6 +60,8 @@ alias gentfdocs="terraform-docs markdown table . > README.md"
 
 alias hotspot="sudo networksetup -setmanual Wi-Fi 172.20.10.3 255.255.255.240 172.20.10.1"
 alias unhotspot="sudo networksetup -setdhcp Wi-Fi"
+
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 if test -e ~/.config/fish/aliases.fish
     source ~/.config/fish/aliases.fish
@@ -111,6 +114,11 @@ tide configure --auto --style=Rainbow --prompt_colors='True color' \
     --prompt_spacing=Sparse \
     --icons='Few icons' \
     --transient=Yes
+
+# setup zoxide
+zoxide init fish | source
+# setup fzf
+fzf --fish | source
 
 # always clear at the end
 clear
