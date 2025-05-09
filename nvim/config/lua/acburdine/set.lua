@@ -33,6 +33,10 @@ vim.opt.colorcolumn = "80"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.opt.shell = '/bin/bash'
+vim.opt.shellquote = nil
+vim.opt.shellxquote = nil
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 

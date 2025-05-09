@@ -1,20 +1,3 @@
---
--- This function has been generated from your
---   view.mappings.list
---   view.mappings.custom_only
---   remove_keymaps
---
--- You should add this function to your configuration and set on_attach = on_attach in the nvim-tree setup call.
---
--- Although care was taken to ensure correctness and completeness, your review is required.
---
--- Please check for the following issues in auto generated content:
---   "Mappings removed" is as you expect
---   "Mappings migrated" are correct
---
--- Please see https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach for assistance in migrating.
---
-
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
 
@@ -90,40 +73,46 @@ local function on_attach(bufnr)
 
 end
 
--- NOTE: this should not be required in init.lua, it's required
--- during lazy plugin setup
-require("nvim-tree").setup({
-  disable_netrw = true,
-  hijack_netrw = true,
-  sort_by = "case_sensitive",
-  on_attach = on_attach,
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-})
+return {
+  "nvim-tree/nvim-tree.lua",
+  lazy = false,
+  dependencies = {"nvim-tree/nvim-web-devicons"},
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  callback = function(data)
-    -- buffer is a [No Name]
-    local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+  config = function ()
+    require("nvim-tree").setup({
+      disable_netrw = true,
+      hijack_netrw = true,
+      sort_by = "case_sensitive",
+      on_attach = on_attach,
+      view = {
+        width = 30,
+      },
+      renderer = {
+        group_empty = true,
+      },
+    })
 
-    -- buffer is a directory
-    local directory = vim.fn.isdirectory(data.file) == 1
+    vim.api.nvim_create_autocmd({ "VimEnter" }, {
+      callback = function(data)
+        -- buffer is a [No Name]
+        local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
 
-    if not no_name and not directory then
-      return
-    end
+        -- buffer is a directory
+        local directory = vim.fn.isdirectory(data.file) == 1
 
-    if directory then
-      vim.cmd.cd(data.file)
-    end
+        if not no_name and not directory then
+          return
+        end
 
-    -- open the tree
-    require("nvim-tree.api").tree.open()
+        if directory then
+          vim.cmd.cd(data.file)
+        end
+
+        -- open the tree
+        require("nvim-tree.api").tree.open()
+      end
+    })
+
+    vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
   end
-})
-
-vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
+}
