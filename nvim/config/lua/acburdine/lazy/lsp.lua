@@ -19,7 +19,7 @@ return {
     local cmp_lsp = require("cmp_nvim_lsp")
 
     local capabilities =
-      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
     require("fidget").setup({})
     require("mason").setup()
@@ -59,6 +59,7 @@ return {
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-v>"] = cmp.mapping.confirm({ select = true }),
         ["<C-space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
       }),
 
       sources = cmp.config.sources({
