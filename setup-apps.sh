@@ -12,14 +12,13 @@ if ! cat /etc/shells | grep -q "$fishpath"; then
   sudo chsh -s "$fishpath" "$(whoami)"
 fi
 
-if ! defaultbrowser | grep -q "^\* firefox"; then
-  echo "setting firefox as default browser"
-  # set firefox as default browser
-  defaultbrowser firefox
+if "${SETUP_PROFILE}" == "personal"; then
+  if ! defaultbrowser | grep -q "^\* firefox"; then
+    echo "setting firefox as default browser"
+    # set firefox as default browser
+    defaultbrowser firefox
+  fi
 fi
-
-# Install One Dark itermcolors theme
-open "${DOTFILES_DIR}/theme/One Dark.itermcolors"
 
 if ! ls ~/Library/Fonts | grep -q "MonoLisa"; then
   echo "Downloading MonoLisa font"
