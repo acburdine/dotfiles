@@ -2,8 +2,7 @@
 
 set -e
 
-# brew bundle install --file="$DOTFILES_DIR/apps/Brewfile"
-# pip3 install neovim
+brew bundle install --file="$DOTFILES_DIR/apps/Brewfile"
 
 # fish shell config
 fishpath=$(which fish)
@@ -18,22 +17,4 @@ if "${SETUP_PROFILE}" == "personal"; then
     # set firefox as default browser
     defaultbrowser firefox
   fi
-fi
-
-if ! ls ~/Library/Fonts | grep -q "MonoLisa"; then
-  echo "Downloading MonoLisa font"
-  open "https://monolisa.dev/orders"
-
-  read -p "Press Enter once font has been downloaded"
-
-  monolisa_file=$(ls ~/Downloads | grep '^MonoLisa.*\.zip$' | sort -nk 4 | head -1)
-
-  mkdir -p "$HOME/Downloads/MonoLisa"
-  unzip -d "$HOME/Downloads/MonoLisa" "$monolisa_file"
-
-  set +e
-  docker run -it -v "$HOME/Downloads/MonoLisa:/in" -v "$HOME/Downloads/MonoLisa-patched:/out" --rm nerdfonts/patcher -c --careful -q
-  set -e
-
-  open $HOME/Downloads/MonoLisa-patched/*.ttf
 fi

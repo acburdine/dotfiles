@@ -65,6 +65,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 alias gcl="gcloud auth print-access-token >/dev/null"
 alias gcal="gcloud auth application-default login"
+
 if test -e ~/.config/fish/aliases.fish
     source ~/.config/fish/aliases.fish
 end
@@ -92,7 +93,7 @@ function __check_nvm --on-variable PWD --description 'automatic nvm use'
         set node_version (node -v)
         set nvmrc_node_version (nvm list | grep (cat .nvmrc))
 
-        if set -q $nvmrc_node_version
+        if test -z "$nvmrc_node_version"
             nvm install
         else if string match -q -- "*$node_version" $nvmrc_node_version
             # already current node version
