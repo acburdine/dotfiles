@@ -41,6 +41,7 @@ brew "jesseduffield/lazygit/lazygit"
 brew "joshmedeski/sesh/sesh"
 
 cask "alfred"
+cask "ghostty"
 cask "google-cloud-sdk"
 cask "gpg-suite-no-mail"
 cask "rectangle"
