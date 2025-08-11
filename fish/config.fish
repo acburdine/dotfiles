@@ -11,7 +11,7 @@ end
 # NOTE: it looks like homebrew is here multiple times, this is just easier than trying
 # to do os-specific logic
 set -x PATH /usr/local/bin /opt/homebrew/bin /opt/homebrew/opt/ruby/bin /home/linuxbrew/.linuxbrew/bin \
-    /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin $HOME/.local/bin \
+    /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.rd/bin \
     /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin \
     /usr/local/opt/php/bin /usr/local/opt/php/sbin
 
@@ -63,6 +63,8 @@ alias unhotspot="sudo networksetup -setdhcp Wi-Fi"
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
+alias gcl="gcloud auth print-access-token >/dev/null"
+alias gcal="gcloud auth application-default login"
 if test -e ~/.config/fish/aliases.fish
     source ~/.config/fish/aliases.fish
 end

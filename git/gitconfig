@@ -46,6 +46,7 @@
 	g = grep
 	sw = switch
 	swm = "!git switch $(git default)"
+	stl = stash list
 
 [user]
 	name = Austin Burdine
