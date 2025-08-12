@@ -19,20 +19,28 @@ return {
     local cmp_lsp = require("cmp_nvim_lsp")
 
     local capabilities =
-        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
     require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "lua_ls",
-        -- "rust_analyzer",
+        "dockerls",
+        "efm",
+        "eslint",
         "gopls",
         "graphql",
         "html",
-        "dockerls",
+        "jsonls",
+        "lua_ls",
+        "prismals",
+        "pyright",
+        "pylsp",
+        -- "rust_analyzer",
         "tailwindcss",
+        "taplo",
         "terraformls",
+        "ts_ls",
         "yamlls",
       },
 
