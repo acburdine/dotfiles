@@ -6,13 +6,13 @@ return {
         suggestion = { enabled = false },
         panel = { enabled = false },
       })
-    end
+    end,
   },
   {
     "zbirenbaum/copilot-cmp",
     config = function()
       require("copilot_cmp").setup()
-    end
+    end,
   },
   -- {
   --   "copilotlsp-nvim/copilot-lsp",
@@ -36,7 +36,13 @@ return {
     },
 
     config = function()
-      require("codecompanion").setup({})
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "copilot",
+          },
+        },
+      })
     end,
   },
 }
