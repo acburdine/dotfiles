@@ -4,6 +4,9 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
+# allow switching between personal and work setup
+export SETUP_PROFILE="${1:-personal}"
+
 if [ "$(uname)" == "Darwin" ]; then
   source "$DOTFILES_DIR/setup-mac.sh"
 elif [ "$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d \")" == "Ubuntu" ]; then

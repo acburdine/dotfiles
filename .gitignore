@@ -1,2 +1,4 @@
 task
 apps/Brewfile.lock.json
+misc-config/sesh/personal.toml
+misc-config/sesh/work.toml

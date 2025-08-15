@@ -1,5 +1,5 @@
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 
 [alias]
 	cf = config
@@ -46,6 +46,7 @@
 	g = grep
 	sw = switch
 	swm = "!git switch $(git default)"
+	stl = stash list
 
 [user]
 	name = Austin Burdine
@@ -62,14 +63,15 @@
 	protocol = https
 
 [push]
-  default = current
+	default = current
+	autoSetupRemote = true
 
 [commit]
 	gpgsign = true
 	signingkey = FB38863ACF00D553
 
 [interactive]
-  diffFilter = diff-so-fancy --patch
+	diffFilter = diff-so-fancy --patch
 
 [init]
-  defaultBranch = main
+	defaultBranch = main

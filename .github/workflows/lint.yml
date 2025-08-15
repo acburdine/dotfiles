@@ -1,16 +1,25 @@
-name: 'Lint'
+name: "Lint"
 
 on: pull_request
+
+permissions: {}
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: github/super-linter@v4.6.2
+      - uses: super-linter/super-linter@v8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
+          VALIDATE_LUA: "false"
