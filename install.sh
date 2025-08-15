@@ -12,4 +12,4 @@ git clone https://github.com/acburdine/dotfiles dotfiles
 cd ~/dotfiles
 
 # lastly, start setup script
-bash ./setup.sh $1
+bash ./setup.sh "$1"
