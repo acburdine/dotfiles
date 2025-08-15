@@ -1,5 +1,5 @@
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 
 [alias]
 	cf = config
@@ -63,15 +63,15 @@
 	protocol = https
 
 [push]
-  default = current
-  autoSetupRemote = true
+	default = current
+	autoSetupRemote = true
 
 [commit]
 	gpgsign = true
 	signingkey = FB38863ACF00D553
 
 [interactive]
-  diffFilter = diff-so-fancy --patch
+	diffFilter = diff-so-fancy --patch
 
 [init]
-  defaultBranch = main
+	defaultBranch = main

@@ -1,5 +1,10 @@
 cache = true
 
+stds.nvim = {
+  read_globals = { "jit" }
+}
+std = "lua51+nvim"
+
 read_globals = {
   "vim",
 }
