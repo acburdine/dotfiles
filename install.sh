@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # first, make sure we're in the home dir
 cd ~
 
