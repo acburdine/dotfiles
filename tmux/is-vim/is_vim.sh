@@ -28,16 +28,15 @@ descendants=$(ps -eo pid=,ppid=,stat= | awk -v pid="$pane_pid" '{
 
 # Check if there are any descendant processes.
 if [ -n "$descendants" ]; then
-    # Convert the list of descendant PIDs into a comma-separated string.
-    descendant_pids=$(echo "$descendants" | tr '\n' ',' | sed 's/,$//')
+  # Convert the list of descendant PIDs into a comma-separated string.
+  descendant_pids=$(echo "$descendants" | tr '\n' ',' | sed 's/,$//')
 
-    # Check if any of the descendant processes match a Vim-related command.
-    ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"
-
+  # Check if any of the descendant processes match a Vim-related command.
+  # shellcheck disable=SC2009 i don't care to figure out pgrep
+  if ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"; then
     # Exit with success if a Vim-related command is found.
-    if [ $? -eq 0 ]; then
-        exit 0
-    fi
+    exit 0
+  fi
 fi
 
 # Exit with failure if no Vim-related process is detected.
