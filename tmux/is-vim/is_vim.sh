@@ -32,7 +32,7 @@ if [ -n "$descendants" ]; then
   descendant_pids=$(echo "$descendants" | tr '\n' ',' | sed 's/,$//')
 
   # Check if any of the descendant processes match a Vim-related command.
-  # shellcheck disable=SC2009 i don't care to figure out pgrep
+  # shellcheck disable=SC2009
   if ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"; then
     # Exit with success if a Vim-related command is found.
     exit 0

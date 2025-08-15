@@ -1,5 +1,3 @@
 cache = true
 
-std = {
-  globals = {"vim"}
-}
+globals = {"vim"}

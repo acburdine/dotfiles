@@ -6,7 +6,7 @@ brew bundle install --file="$DOTFILES_DIR/apps/Brewfile"
 
 # fish shell config
 fishpath=$(which fish)
-if ! grep -q "$fishpath" < /etc/shells; then
+if ! grep -q "$fishpath" </etc/shells; then
   echo "$fishpath" | sudo tee -a /etc/shells
   sudo chsh -s "$fishpath" "$(whoami)"
 fi
