@@ -8,12 +8,14 @@ if type -q go
     set -x GOPATH (go env GOPATH)
 end
 
-# NOTE: it looks like homebrew is here multiple times, this is just easier than trying
-# to do os-specific logic
-set -x PATH /usr/local/bin /opt/homebrew/bin /opt/homebrew/opt/ruby/bin /home/linuxbrew/.linuxbrew/bin \
-    /usr/local/sbin $PATH $HOME/bin $GOPATH/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.rd/bin \
-    /opt/cisco/anyconnect/bin $HOME/.composer/vendor/bin \
-    /usr/local/opt/php/bin /usr/local/opt/php/sbin
+brew shellenv | source
+
+fish_add_path -gaP (path filter \
+  $HOME/bin \
+  $HOME/.cargo/bin \
+  $HOME/.local/bin \
+  $HOME/.rd/bin
+)
 
 set -x EDITOR nvim
 
@@ -88,9 +90,16 @@ if test -n $CODESPACES && ! type -q fisher && status --is-login
     fish -c "curl -sL https://git.io/fisher | source && fisher update" 2>/dev/null
 end
 
+set --universal nvm_default_version v22
+set --universal nvm_default_packages pm2@latest nx@latest turbo@latest
+
 function __check_nvm --on-variable PWD --description 'automatic nvm use'
     if test -f .nvmrc
-        set node_version (node -v)
+        set node_version ''
+        if type -q node
+            set node_version (node -v)
+        end
+
         set nvmrc_node_version (nvm list | grep (cat .nvmrc))
 
         if test -z "$nvmrc_node_version"
