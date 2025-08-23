@@ -10,7 +10,7 @@ pane_pid=$(tmux display -p "#{pane_pid}")
 # This includes child processes and their descendants recursively.
 # excludes processes in the "stopped" state (state=T) as they are not considered active.
 descendants=$(ps -eo pid=,ppid=,stat= | awk -v pid="$pane_pid" '{
-    if ($3 !~ /^T/) {
+    if ($3 !~ /^[TXZ]/) {
         pid_array[$1]=$2
     }
 } END {
@@ -33,7 +33,7 @@ if [ -n "$descendants" ]; then
 
   # Check if any of the descendant processes match a Vim-related command.
   # shellcheck disable=SC2009
-  if ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"; then
+  if ps -o comm= -p "$descendant_pids" | grep -iqE '^(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'; then
     # Exit with success if a Vim-related command is found.
     exit 0
   fi

@@ -8,7 +8,8 @@ if type -q go
     set -x GOPATH (go env GOPATH)
 end
 
-brew shellenv | source
+# note: fix homebrew path
+/opt/homebrew/bin/brew shellenv | source
 
 fish_add_path -gaP (path filter \
   $HOME/bin \
