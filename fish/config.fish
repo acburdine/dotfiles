@@ -13,6 +13,7 @@ end
 
 fish_add_path -gaP (path filter \
   $HOME/bin \
+  $HOME/go/bin \
   $HOME/.cargo/bin \
   $HOME/.local/bin \
   $HOME/.rd/bin
@@ -30,6 +31,9 @@ set -x SHELL (status fish-path)
 
 # disable fish greeting
 set fish_greeting
+
+# use vi key bindings
+set -g fish_key_bindings fish_vi_key_bindings
 
 alias ls="ls -GFh"
 alias fp="nvim ~/.config/fish/config.fish"
@@ -58,6 +62,7 @@ alias vi="nvim"
 alias vim="nvim"
 
 alias lg="lazygit"
+alias lzd="lazydocker"
 
 alias gentfdocs="terraform-docs markdown table . > README.md"
 
@@ -66,7 +71,7 @@ alias unhotspot="sudo networksetup -setdhcp Wi-Fi"
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
-alias gcl="gcloud auth print-access-token >/dev/null"
+alias gcl="gcloud auth login --brief --quiet --update-adc"
 alias gcal="gcloud auth application-default login"
 
 if test -e ~/.config/fish/aliases.fish
@@ -92,7 +97,7 @@ if test -n $CODESPACES && ! type -q fisher && status --is-login
 end
 
 set --universal nvm_default_version v22
-set --universal nvm_default_packages pm2@latest nx@latest turbo@latest
+set --universal nvm_default_packages pm2@latest turbo@latest
 
 function __check_nvm --on-variable PWD --description 'automatic nvm use'
     if test -f .nvmrc
@@ -135,3 +140,10 @@ fzf --fish | source
 
 # always clear at the end
 clear
+
+# pnpm
+set -gx PNPM_HOME /Users/aburdine/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
