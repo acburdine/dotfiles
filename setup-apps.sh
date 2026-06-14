@@ -18,3 +18,11 @@ if [ "${SETUP_PROFILE}" = "personal" ]; then
     defaultbrowser firefox
   fi
 fi
+
+echo "setting up gpg-agent"
+mkdir -p ~/.gnupg
+
+echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" >~/.gnupg/gpg-agent.conf
+echo 'use-agent' >~/.gnupg/gpg.conf
+chmod 700 ~/.gnupg
+killall gpg-agent
