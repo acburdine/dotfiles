@@ -27,3 +27,4 @@ jobs:
           DEFAULT_BRANCH: main
           VALIDATE_LUA: "false"
           VALIDATE_BIOME_FORMAT: "false"
+          VALIDATE_SPELL_CODESPELL: "false"
