@@ -46,7 +46,7 @@ brew bundle install --file=apps/Brewfile
 Each tool directory follows the same pattern:
 
 - `<tool>/setup.fish` — symlinks config files into the appropriate `~/.config/` or `~~/` location
-- The actual config files live in the repository and are symlinked (not copied), so edits in `~/` take effect immediately in the repo
+- The actual config files live in the repository and are symlinked (not copied), so edits in `~/` take effect immediately in the repository
 
 ### How `setup.sh` works
 
